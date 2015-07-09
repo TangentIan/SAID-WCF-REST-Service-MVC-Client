@@ -12,5 +12,12 @@ namespace SAID_MVCWebApplication.Controllers
 		{
 			return View();
 		}
+
+		public JsonResult GetID()
+		{
+			SAID_ServiceReference.SAIDGeneratorServiceClient SAID_Service = new SAID_ServiceReference.SAIDGeneratorServiceClient();
+
+			return Json(SAID_Service.GenerateRandomSAIDNumber(), JsonRequestBehavior.AllowGet);
+		}
 	}
 }

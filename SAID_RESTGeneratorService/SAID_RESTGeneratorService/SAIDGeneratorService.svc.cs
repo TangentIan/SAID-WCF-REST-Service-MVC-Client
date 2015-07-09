@@ -1,11 +1,4 @@
 ﻿using SAID_RESTGeneratorService.App_Code;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Web;
-using System.Text;
 
 namespace SAID_RESTGeneratorService
 {
@@ -19,7 +12,7 @@ namespace SAID_RESTGeneratorService
 		}
 		public SAIDGeneratorResponse GenerateRandomSAIDNumber()
 		{
-			throw new NotImplementedException(); 
+			return this.IDNumberWorker.GenerateRandomSAIDNumber();
 		}
 		public SAIDGeneratorResponse ValidateSAIDNumber(string IDNumber)
 		{

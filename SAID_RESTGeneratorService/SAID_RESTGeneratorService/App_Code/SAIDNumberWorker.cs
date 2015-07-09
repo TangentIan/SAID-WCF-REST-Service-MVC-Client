@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace SAID_RESTGeneratorService.App_Code
 {
@@ -18,6 +17,32 @@ namespace SAID_RESTGeneratorService.App_Code
 		}
 
 		#region Generate Random SA ID Number.
+		public SAIDGeneratorResponse GenerateRandomSAIDNumber()
+		{
+			SAIDGeneratorResponse GenerationResponse = new SAIDGeneratorResponse();
+
+			int MaxRetries = 15; //Max allowed retries, allow retry, but prevent an infinite loop.
+			string IDString = this.ConcatenateRandomIDParts();
+			GenerationResponse = this.ValidateSAIDNumber(IDString);
+
+			while (!GenerationResponse.Success && MaxRetries < 15)
+			{
+				IDString = this.ConcatenateRandomIDParts();
+				GenerationResponse = this.ValidateSAIDNumber(IDString);
+				MaxRetries += 1;
+			}
+
+			if (!GenerationResponse.Success) //Random SA ID Number generation failed.
+			{
+				GenerationResponse.Message = "Error - An unforseen error prevented a random SA ID number from being generated. Please try again.";
+			}
+			else
+			{
+				GenerationResponse.Message = IDString;
+			}
+
+			return GenerationResponse;
+		}
 		private string ConcatenateRandomIDParts()
 		{
 			Task<string>[] IDTaskArray = { 

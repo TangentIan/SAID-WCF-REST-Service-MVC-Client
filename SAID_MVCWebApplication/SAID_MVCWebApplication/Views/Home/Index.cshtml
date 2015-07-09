@@ -1,3 +1,34 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+	ViewBag.Title = "Home";
+}
+
+<table>
+	<tr>
+		<th colspan="2">
+			Generate a Random SA ID Number
+		</th>
+		<td>
+			<input type="button" value="Generate ID" onclick="generateRandomIDNumber();" />
+		</td>
+		<td>
+			<label id="RandomIDNumberLbl" />
+		</td>
+	</tr>
+</table>
+
+@section scripts
+{
+	<script type="text/javascript">
+		function generateRandomIDNumber() {
+			$.getJSON(
+			  "/Home/GetID",
+			  {}
+			)
+			.success(function(idData){
+				$('#RandomIDNumberLbl').text(idData.Message);
+			})
+		};
+
+		
+	</script>
 }
