@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SAID_RESTGeneratorService.App_Code;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -12,9 +13,9 @@ namespace SAID_RESTGeneratorService
 	{
 		public string GenerateRandomSAIDNumber()
 		{
-			throw new NotImplementedException();
+			throw new NotImplementedException(); 
 		}
-		public string ValidateSAIDNumber(string IDNumber)
+		public SAIDGeneratorResponse ValidateSAIDNumber(string IDNumber)
 		{
 			throw new NotImplementedException();
 		}

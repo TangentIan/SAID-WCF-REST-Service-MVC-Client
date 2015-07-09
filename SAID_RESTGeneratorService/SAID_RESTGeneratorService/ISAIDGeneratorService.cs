@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SAID_RESTGeneratorService.App_Code;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -9,7 +10,7 @@ using System.Text;
 namespace SAID_RESTGeneratorService
 {
 	[ServiceContract]
-	public interface ISAIDGeneratorService
+	public interface ISAIDGeneratorService 
 	{
 		[OperationContract]
 		[WebGet(ResponseFormat = WebMessageFormat.Json)]
@@ -17,6 +18,6 @@ namespace SAID_RESTGeneratorService
 
 		[OperationContract]
 		[WebGet(UriTemplate = "ValidateSAIDNumber/{IDNumber}", ResponseFormat = WebMessageFormat.Json)]
-		string ValidateSAIDNumber(string IDNumber);
+		SAIDGeneratorResponse ValidateSAIDNumber(string IDNumber);
 	}
 }
