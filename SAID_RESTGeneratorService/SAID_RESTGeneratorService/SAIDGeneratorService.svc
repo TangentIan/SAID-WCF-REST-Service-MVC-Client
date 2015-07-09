@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="SAID_RESTGeneratorService.SAIDGeneratorService" CodeBehind="SAIDGeneratorService.svc.cs" %>
