@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq; 
+using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace SAID_RESTGeneratorService.App_Code
@@ -15,6 +16,90 @@ namespace SAID_RESTGeneratorService.App_Code
 		{
 			this.RandomNumber = new Random((int)System.DateTime.Now.Ticks); //Will be used to randomly create the various sections of the ID Number.
 		}
+
+		#region Generate Random SA ID Number.
+		private string ConcatenateRandomIDParts()
+		{
+			Task<string>[] IDTaskArray = { 
+													 Task<string>.Factory.StartNew(() => GenerateRandomDateOfBirth()),
+                                        Task<string>.Factory.StartNew(() => GenerateRandomGenderSequence()), 
+                                        Task<string>.Factory.StartNew(() => GenerateRandomCitizenship()),
+                                        Task<string>.Factory.StartNew(() => GenerateRandomSubEndValue())
+												  };
+
+			Task.WaitAll(IDTaskArray); //Wait for all tasks to complete.
+
+			string IDString = "";
+
+			for (int i = 0; i < IDTaskArray.Length; i++) //Concatenate the randomly generated parts.
+			{
+				IDString += IDTaskArray[i].Result;
+			}
+
+			IDString += this.CalculateOddAndEvenNumberSums(IDString); //Calculate the 13th digit to balance the randomly generated ID.
+
+			return IDString;
+		}
+		private string GenerateRandomDateOfBirth()
+		{
+			DateTime EndDate = System.DateTime.Today;
+			DateTime StartDate = EndDate.AddYears(-99); //Only the last 100 years for a unique set of years.
+
+			return StartDate.AddDays(this.RandomNumber.Next((EndDate - StartDate).Days + 1)).ToString("yyMMdd");
+		}
+		private string GenerateRandomGenderSequence()
+		{
+			return this.RandomNumber.Next(10000).ToString().PadLeft(4, '0'); //0 - 4999 is female, 5000 - 9999 is male.
+		}
+		private string GenerateRandomCitizenship()
+		{
+			return this.RandomNumber.Next(2).ToString(); //0 - RSA, 1 - Other.
+		}
+		private string GenerateRandomSubEndValue()
+		{
+			return this.RandomNumber.Next(10).ToString(); //Random number, no rules 0 - 9.
+		}
+		private string CalculateOddAndEvenNumberSums(string IDString)
+		{
+			try
+			{
+				int EvenNumbersSum = 0;
+				int OddNumbersSum = 0;
+
+				string EvenNumbers = "";
+				List<int> OddNumbersList = new List<int>();
+
+				for (int i = 0; i < IDString.Length; i++)
+				{
+					if ((i + 1) % 2 == 0)
+					{
+						EvenNumbers += IDString[i].ToString(); //Concatenate even numbers.
+					}
+					else
+					{
+						OddNumbersList.Add(int.Parse(IDString[i].ToString())); //Add uneven numbers to a list.
+					}
+				}
+
+				OddNumbersSum = OddNumbersList.Sum(); //Summ all uneven numbers.
+				EvenNumbers = (int.Parse(EvenNumbers) * 2).ToString(); //Multiply the concatenated even numbers result with 2.
+
+				foreach (char chr in EvenNumbers)
+				{
+					EvenNumbersSum += int.Parse(chr.ToString()); //Get the sum of the individual numbers of the abovementioned result.
+				}
+
+				int SumTotal = (OddNumbersSum + EvenNumbersSum) % 10; //Get the MOD of the calculated uneven & even numbers result - to get the last/second digit.
+				SumTotal = (10 - SumTotal) % 10; //Subtract the above result from 10 - get the MOD of the cum of the above - to get the last/second digit --> the control digit for the supplied 12 digits ID.
+
+				return SumTotal.ToString();
+			}
+			catch
+			{
+				return null;
+			}
+		}
+		#endregion
 
 		#region Validate SA ID Number.
 		public SAIDGeneratorResponse ValidateSAIDNumber(string IDNumber)
