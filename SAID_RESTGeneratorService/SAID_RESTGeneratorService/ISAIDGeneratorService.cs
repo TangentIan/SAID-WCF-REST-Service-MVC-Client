@@ -14,7 +14,7 @@ namespace SAID_RESTGeneratorService
 	{
 		[OperationContract]
 		[WebGet(ResponseFormat = WebMessageFormat.Json)]
-		string GenerateRandomSAIDNumber();
+		SAIDGeneratorResponse GenerateRandomSAIDNumber();
 
 		[OperationContract]
 		[WebGet(UriTemplate = "ValidateSAIDNumber/{IDNumber}", ResponseFormat = WebMessageFormat.Json)]

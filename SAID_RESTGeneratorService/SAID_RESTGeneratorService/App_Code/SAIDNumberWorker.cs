@@ -9,7 +9,7 @@ namespace SAID_RESTGeneratorService.App_Code
 	public class SAIDNumberWorker
 	{
 		private static Regex SAIDNumberRegex = new Regex("^[0-9]{13}$");
-		private Random RandomNumber = null;
+		private Random RandomNumber = null; 
 
 		public SAIDNumberWorker()
 		{

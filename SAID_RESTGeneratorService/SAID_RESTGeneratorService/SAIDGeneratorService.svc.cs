@@ -11,13 +11,19 @@ namespace SAID_RESTGeneratorService
 {
 	public class SAIDGeneratorService : ISAIDGeneratorService
 	{
-		public string GenerateRandomSAIDNumber()
+		private SAIDNumberWorker IDNumberWorker = new SAIDNumberWorker();
+
+		public SAIDGeneratorService()
+		{
+			this.IDNumberWorker = new SAIDNumberWorker();
+		}
+		public SAIDGeneratorResponse GenerateRandomSAIDNumber()
 		{
 			throw new NotImplementedException(); 
 		}
 		public SAIDGeneratorResponse ValidateSAIDNumber(string IDNumber)
 		{
-			throw new NotImplementedException();
+			return this.IDNumberWorker.ValidateSAIDNumber(IDNumber);
 		}
 	}
 }
