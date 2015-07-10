@@ -60,7 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="SAIDGeneratorService.svc" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\SAIDNumberWorker.cs" />

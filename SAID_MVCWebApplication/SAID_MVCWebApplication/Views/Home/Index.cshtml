@@ -4,9 +4,10 @@
 
 <table>
 	<tr>
-		<th colspan="2">
-			Generate a Random SA ID Number
+		<th colspan="2">Generate a Random SA ID Number
 		</th>
+	</tr>
+	<tr>
 		<td>
 			<input type="button" value="Generate ID" onclick="generateRandomIDNumber();" />
 		</td>
@@ -14,21 +15,99 @@
 			<label id="RandomIDNumberLbl" />
 		</td>
 	</tr>
+	<tr>
+		<th colspan="2">Validate an SA ID Number
+		</th>
+	</tr>
+	<tr>
+		<td>
+			<input type="test" id="SAIDNumberTxtBox" />
+		</td>
+		<td>
+			<input type="button" value="Validate ID" onclick="validateIDNumber();" />
+		</td>
+	</tr>
 </table>
 
 @section scripts
 {
 	<script type="text/javascript">
+		var generateErrorText = 'generation';
+		var validateErrorText = 'validation';
+
+		//SECTION START --> GENERATE ID NUMBER.
+
 		function generateRandomIDNumber() {
+			//todo: display splash screen.
+
 			$.getJSON(
 			  "/Home/GetID",
 			  {}
 			)
-			.success(function(idData){
-				$('#RandomIDNumberLbl').text(idData.Message);
+			.success(function (idData) {
+				if (idData === undefined || idData === null) {
+					displayErrorMessage(true, generateErrorText, null); //Display a generic error message.
+				} else {
+					if (idData.Success === false) {
+						displayErrorMessage(false, generateErrorText, idData.Message); //Display the error message returned by the service.
+					} else {
+						populateRandomIDNumberLbl(idData.Message); //Success - display the generate ID number.
+					}
+				}
+			})
+			.fail(function () {
+				populateRandomIDNumberLbl('');
+				displayErrorMessage(true, generateErrorText, null);
+			})
+			.always(function () { //Hide the splash screen.
+				//todo: hide splash screen.
+			})
+		};
+		function populateRandomIDNumberLbl(_text) {
+			$('#RandomIDNumberLbl').text(_text);
+		};
+
+		//SECTION END --> GENERATE ID NUMBER.
+
+		//SECTION START --> VALIDATE ID NUMBER.
+		//todo: display splash screen.
+
+		function validateIDNumber() {
+			$.getJSON(
+			  "/Home/ValidateID?IDNumber=" + $('#SAIDNumberTxtBox').val(),
+			  {}
+			)
+			.success(function (idData) {
+				if (idData === undefined || idData === null) {
+					displayErrorMessage(true, validateErrorText, null); //Display a generic error message.
+				} else {
+					if (idData.Success === false) {
+						displayErrorMessage(false, validateErrorText, idData.Message); //Display the error message returned by the service.
+					} else {
+						alert(idData.Message); //Success - display the message returned from the service.
+					}
+				}
+			})
+			.fail(function () {
+				displayErrorMessage(true, validateErrorText, null);
+			})
+			.always(function () { //Hide the splash screen.
+				//todo: hide splash screen.
 			})
 		};
 
-		
+		//SECTION END --> VALIDATE ID NUMBER.
+
+		//SECTION START --> GENERIC.
+
+		function displayErrorMessage(_isGeneric, _errorType, _errorMessage) {
+			if (_isGeneric === true) {
+				alert('Error - An unforseen error prevented ID Number ' + _errorType + '. Please try again.');
+			} else {
+				alert(_errorMessage);
+			}
+		};
+
+		//SECTION END --> GENERIC.
 	</script>
 }

@@ -48,6 +48,5 @@ C:\SAID_Generator\SAID_GitRepo\SAID_MVCWebApplication\SAID_MVCWebApplication\bin
 C:\SAID_Generator\SAID_GitRepo\SAID_MVCWebApplication\SAID_MVCWebApplication\bin\DotNetOpenAuth.OAuth.xml
 C:\SAID_Generator\SAID_GitRepo\SAID_MVCWebApplication\SAID_MVCWebApplication\bin\DotNetOpenAuth.OpenId.xml
 C:\SAID_Generator\SAID_GitRepo\SAID_MVCWebApplication\SAID_MVCWebApplication\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
-C:\SAID_Generator\SAID_GitRepo\SAID_MVCWebApplication\SAID_MVCWebApplication\obj\Debug\SAID_MVCWebApplication.csprojResolveAssemblyReference.cache
 C:\SAID_Generator\SAID_GitRepo\SAID_MVCWebApplication\SAID_MVCWebApplication\obj\Debug\SAID_MVCWebApplication.dll
 C:\SAID_Generator\SAID_GitRepo\SAID_MVCWebApplication\SAID_MVCWebApplication\obj\Debug\SAID_MVCWebApplication.pdb
