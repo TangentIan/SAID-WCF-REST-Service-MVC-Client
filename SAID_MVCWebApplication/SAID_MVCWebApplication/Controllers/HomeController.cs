@@ -16,7 +16,7 @@ namespace SAID_MVCWebApplication.Controllers
 		}
 		//Gets a valid, randomly generated SA ID number from the WCF REST service.
 		[HttpGet]
-		public JsonResult GetID()
+		public JsonResult GetRandomIDNumber()
 		{
 			try
 			{
@@ -34,7 +34,7 @@ namespace SAID_MVCWebApplication.Controllers
 		}
 		//Send a user entered ID number to the WCF REST service for validation.
 		[HttpGet]
-		public JsonResult ValidateID(string IDNumber)
+		public JsonResult ValidateIDNumber(string IDNumber)
 		{
 			try
 			{

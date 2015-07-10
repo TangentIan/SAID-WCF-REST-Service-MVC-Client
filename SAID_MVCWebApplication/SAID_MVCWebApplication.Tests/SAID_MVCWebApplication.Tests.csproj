@@ -6,7 +6,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A27BD835-0757-4771-9688-7E057A273244}</ProjectGuid>
+    <ProjectGuid>{5DCE2044-F30A-4852-8287-27FCD1E57E69}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SAID_MVCWebApplication.Tests</RootNamespace>
@@ -108,7 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SAID_MVCWebApplication\SAID_MVCWebApplication.csproj">
-      <Project>{AE78E157-B42A-4000-B52C-1117191CB1DF}</Project>
+      <Project>{42BFFC10-B749-4483-A10A-FC1BA8D7A88A}</Project>
       <Name>SAID_MVCWebApplication</Name>
     </ProjectReference>
   </ItemGroup>

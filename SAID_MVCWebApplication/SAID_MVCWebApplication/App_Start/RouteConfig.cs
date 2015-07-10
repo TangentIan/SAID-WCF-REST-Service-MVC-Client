@@ -21,7 +21,7 @@ namespace SAID_MVCWebApplication
 			routes.MapRoute(
 				 name: "ValidateIDNumber",
 				 url: "{controller}/{action}/{IDNumber}",
-				 defaults: new { controller = "Home", action = "ValidateID", IDNumber = UrlParameter.Optional }
+				 defaults: new { controller = "Home", action = "ValidateIDNumber", IDNumber = UrlParameter.Optional }
 			);
 		}
 	}

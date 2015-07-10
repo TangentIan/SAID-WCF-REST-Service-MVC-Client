@@ -9,7 +9,7 @@
 	</tr>
 	<tr>
 		<td>
-			<input type="button" value="Generate ID" onclick="generateRandomIDNumber();" />
+			<input type="button" value="Generate ID" onclick="getRandomIDNumber();" />
 		</td>
 		<td>
 			<label id="RandomIDNumberLbl" />
@@ -21,7 +21,7 @@
 	</tr>
 	<tr>
 		<td>
-			<input type="test" id="SAIDNumberTxtBox" />
+			<input type="text" id="SAIDNumberTxtBox" />
 		</td>
 		<td>
 			<input type="button" value="Validate ID" onclick="validateIDNumber();" />
@@ -37,11 +37,11 @@
 
 		//SECTION START --> GENERATE ID NUMBER.
 
-		function generateRandomIDNumber() {
+		function getRandomIDNumber() {
 			//todo: display splash screen.
 
 			$.getJSON(
-			  "/Home/GetID",
+			  "/Home/GetRandomIDNumber",
 			  {}
 			)
 			.success(function (idData) {
@@ -73,8 +73,14 @@
 		//todo: display splash screen.
 
 		function validateIDNumber() {
+			var IDNumber = $('#SAIDNumberTxtBox').val();
+
+			if (IDNumber === undefined || IDNumber === null){
+				IDNumber = '';
+			}
+
 			$.getJSON(
-			  "/Home/ValidateID?IDNumber=" + $('#SAIDNumberTxtBox').val(),
+			  "/Home/ValidateIDNumber?IDNumber=" + IDNumber,
 			  {}
 			)
 			.success(function (idData) {

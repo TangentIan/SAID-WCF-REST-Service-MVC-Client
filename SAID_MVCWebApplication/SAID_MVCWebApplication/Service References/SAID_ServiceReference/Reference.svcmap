@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ea833a4d-95fe-4696-a341-161e7269ee35" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="dfe090eb-e6a8-4043-962b-be6cf5b16bf1" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -21,11 +21,11 @@
     <MetadataSource Address="http://localhost:23670/SAIDGeneratorService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="SAIDGeneratorService.xsd" MetadataType="Schema" ID="91b04831-7605-46c9-a7f2-f150d41e79d1" SourceId="1" SourceUrl="http://localhost:23670/SAIDGeneratorService.svc?xsd=xsd0" />
-    <MetadataFile FileName="SAIDGeneratorService1.xsd" MetadataType="Schema" ID="2226e4af-e650-4309-81fd-db7589d1d6c8" SourceId="1" SourceUrl="http://localhost:23670/SAIDGeneratorService.svc?xsd=xsd2" />
-    <MetadataFile FileName="SAIDGeneratorService2.xsd" MetadataType="Schema" ID="e9c94cbf-af47-44ce-ab65-14564f132f98" SourceId="1" SourceUrl="http://localhost:23670/SAIDGeneratorService.svc?xsd=xsd1" />
-    <MetadataFile FileName="SAIDGeneratorService.disco" MetadataType="Disco" ID="90621cd1-e359-4f86-9bf6-f2352a2ac221" SourceId="1" SourceUrl="http://localhost:23670/SAIDGeneratorService.svc?disco" />
-    <MetadataFile FileName="SAIDGeneratorService.wsdl" MetadataType="Wsdl" ID="3b360ce1-195a-4890-82af-df620527d161" SourceId="1" SourceUrl="http://localhost:23670/SAIDGeneratorService.svc?wsdl" />
+    <MetadataFile FileName="SAIDGeneratorService.xsd" MetadataType="Schema" ID="73308a36-20b1-4989-92df-f8b09ebf8e15" SourceId="1" SourceUrl="http://localhost:23670/SAIDGeneratorService.svc?xsd=xsd0" />
+    <MetadataFile FileName="SAIDGeneratorService1.xsd" MetadataType="Schema" ID="d4f6d6cf-5989-4152-beb9-503e336ceccf" SourceId="1" SourceUrl="http://localhost:23670/SAIDGeneratorService.svc?xsd=xsd2" />
+    <MetadataFile FileName="SAIDGeneratorService2.xsd" MetadataType="Schema" ID="a36aa3ee-439e-4386-b0ed-99be67a1ab23" SourceId="1" SourceUrl="http://localhost:23670/SAIDGeneratorService.svc?xsd=xsd1" />
+    <MetadataFile FileName="SAIDGeneratorService.disco" MetadataType="Disco" ID="9c4a255d-1617-4355-9379-2cf59ec2889f" SourceId="1" SourceUrl="http://localhost:23670/SAIDGeneratorService.svc?disco" />
+    <MetadataFile FileName="SAIDGeneratorService.wsdl" MetadataType="Wsdl" ID="2a2e4879-9d79-4f41-b09e-9490ccf788af" SourceId="1" SourceUrl="http://localhost:23670/SAIDGeneratorService.svc?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

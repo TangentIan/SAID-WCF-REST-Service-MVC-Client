@@ -15,6 +15,7 @@ namespace SAID_MVCWebApplication.Tests.Controllers
 		[TestMethod]
 		public void Index()
 		{
+			// Arrange
 			HomeController controller = new HomeController();
 
 			// Act
