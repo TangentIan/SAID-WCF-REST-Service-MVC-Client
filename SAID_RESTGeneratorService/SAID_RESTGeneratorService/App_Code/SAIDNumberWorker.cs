@@ -153,7 +153,7 @@ namespace SAID_RESTGeneratorService.App_Code
 					else
 					{
 						ValidationResponse.Success = true;
-						ValidationResponse.Message = "Validated - The ID Number entered has been validated successfully.";
+						ValidationResponse.Message = "Validated - The ID Number entered is correct.";
 					}
 				}
 			}
