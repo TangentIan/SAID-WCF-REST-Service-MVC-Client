@@ -40,6 +40,8 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Extensions" />
@@ -99,9 +101,32 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
+    <Compile Include="Service References\SAID_ServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
+    <None Include="Service References\SAID_ServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\SAID_ServiceReference\configuration.svcinfo" />
+    <None Include="Service References\SAID_ServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\SAID_ServiceReference\SAIDGeneratorService.disco" />
+    <None Include="Properties\DataSources\SAID_MVCWebApplication.SAID_ServiceReference.SAIDGeneratorResponse.datasource" />
+    <None Include="Service References\SAID_ServiceReference\SAIDGeneratorService.wsdl" />
+    <None Include="Service References\SAID_ServiceReference\SAIDGeneratorService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SAID_ServiceReference\SAIDGeneratorService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SAID_ServiceReference\SAIDGeneratorService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -111,6 +136,12 @@
       <Project>{42BFFC10-B749-4483-A10A-FC1BA8D7A88A}</Project>
       <Name>SAID_MVCWebApplication</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\SAID_ServiceReference\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
