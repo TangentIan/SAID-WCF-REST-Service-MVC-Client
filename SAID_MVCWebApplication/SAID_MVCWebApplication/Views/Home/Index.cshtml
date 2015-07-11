@@ -2,42 +2,59 @@
 	ViewBag.Title = "Home";
 }
 
-<table>
-	<tr>
-		<th colspan="2">Generate a Random SA ID Number
-		</th>
-	</tr>
-	<tr>
-		<td>
-			<input type="button" value="Generate ID" onclick="getRandomIDNumber();" />
-		</td>
-		<td>
-			<label id="RandomIDNumberLbl" />
-		</td>
-	</tr>
-	<tr>
-		<th colspan="2">Validate an SA ID Number
-		</th>
-	</tr>
-	<tr>
-		<td>
-			<input type="text" id="SAIDNumberTxtBox" />
-		</td>
-		<td>
-			<input type="button" value="Validate ID" onclick="validateIDNumber();" />
-		</td>
-	</tr>
-</table>
+<div class="container">
+	<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-8">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Generate Random / Validate RSA ID Numbers</div>
+				<div class="panel-body">
+					<div class="input-group">
+						<span class="input-group-btn">
+							<button class="btn btn-success" type="button" onclick="getRandomIDNumber();">Generate ID</button>
+						</span>
+						<input type="text" id="RandomIDNumberTxtBox" class="form-control error-focus" readonly="true" />
+					</div>
+				</div>
+				<div class="panel-body">
+					<div class="input-group">
+						<span class="input-group-btn">
+							<button class="btn btn-success" type="button" onclick="validateIDNumber();">Validate ID</button>
+						</span>
+						<input type="text" placeholder="Enter an ID Number..." id="SAIDNumberTxtBox" class="form-control" maxlength="13" />
+					</div>
+				</div>
+				<div class="panel-body">
+					<div class="alert alert-danger alertDiv" role="alert" style="display: none">
+						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+						<strong id="alertText"></strong>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+</div>
 
 @section scripts
 {
 	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#RandomIDNumberTxtBox').val('');
+			$('#SAIDNumberTxtBox').val('');
+		});
+
 		var generateErrorText = 'generation';
 		var validateErrorText = 'validation';
+		var idnumber_regex = /^[0-9]{13}$/;
 
-		//SECTION START --> GENERATE ID NUMBER.
+		//--> GENERATE ID NUMBER.
 
 		function getRandomIDNumber() {
+			$('.alertDiv').hide();
+			$('#RandomIDNumberTxtBox').removeClass('alert-danger ');
 			//todo: display splash screen.
 
 			$.getJSON(
@@ -51,69 +68,87 @@
 					if (idData.Success === false) {
 						displayErrorMessage(false, generateErrorText, idData.Message); //Display the error message returned by the service.
 					} else {
-						populateRandomIDNumberLbl(idData.Message); //Success - display the generate ID number.
+						populateRandomIDNumberTxtBox(idData.Message); //Success - display the generate ID number.
 					}
 				}
 			})
 			.fail(function () {
-				populateRandomIDNumberLbl('');
+				populateRandomIDNumberTxtBox('');
 				displayErrorMessage(true, generateErrorText, null);
 			})
 			.always(function () { //Hide the splash screen.
 				//todo: hide splash screen.
 			})
 		};
-		function populateRandomIDNumberLbl(_text) {
-			$('#RandomIDNumberLbl').text(_text);
+		function populateRandomIDNumberTxtBox(_text) {
+			$('#RandomIDNumberTxtBox').val(_text);
 		};
 
-		//SECTION END --> GENERATE ID NUMBER.
-
-		//SECTION START --> VALIDATE ID NUMBER.
-		//todo: display splash screen.
+		//--> VALIDATE ID NUMBER.
 
 		function validateIDNumber() {
+			$('.alertDiv').hide();
+			$('#SAIDNumberTxtBox').removeClass('alert-danger ');
+
 			var IDNumber = $('#SAIDNumberTxtBox').val();
 
-			if (IDNumber === undefined || IDNumber === null){
-				IDNumber = '';
-			}
-
-			$.getJSON(
-			  "/Home/ValidateIDNumber?IDNumber=" + IDNumber,
-			  {}
-			)
-			.success(function (idData) {
-				if (idData === undefined || idData === null) {
-					displayErrorMessage(true, validateErrorText, null); //Display a generic error message.
-				} else {
-					if (idData.Success === false) {
-						displayErrorMessage(false, validateErrorText, idData.Message); //Display the error message returned by the service.
+			if (IDNumber === undefined || IDNumber === null || $.trim(IDNumber) === '') {
+				displayErrorMessage(false, null, 'Invalid - Empty values are not allowed.');
+			} else if (!idnumber_regex.test(IDNumber)) {
+				displayErrorMessage(false, null, 'Invalid - Enter a 13 digit numerical only ID number.');
+			} else {
+				$.getJSON(
+				  "/Home/ValidateIDNumber?IDNumber=" + IDNumber,
+				  {}
+				)
+				.success(function (idData) {
+					if (idData === undefined || idData === null) {
+						displayErrorMessage(true, validateErrorText, null); //Display a generic error message.
 					} else {
-						alert(idData.Message); //Success - display the message returned from the service.
+						if (idData.Success === false) {
+							displayErrorMessage(false, validateErrorText, idData.Message); //Display the error message returned by the service.
+						} else {
+							setAlertStatus(idData.Message, false); //Success - display the message returned from the service.
+						}
 					}
-				}
-			})
-			.fail(function () {
-				displayErrorMessage(true, validateErrorText, null);
-			})
-			.always(function () { //Hide the splash screen.
-				//todo: hide splash screen.
-			})
+				})
+				.fail(function () {
+					displayErrorMessage(true, validateErrorText, null);
+				})
+			}
 		};
 
-		//SECTION END --> VALIDATE ID NUMBER.
-
-		//SECTION START --> GENERIC.
+		//--> GENERIC.
 
 		function displayErrorMessage(_isGeneric, _errorType, _errorMessage) {
 			if (_isGeneric === true) {
-				alert('Error - An unforseen error prevented ID Number ' + _errorType + '. Please try again.');
+				setAlertStatus('Error - An unforseen error prevented ID Number ' + _errorType + '. Please try again.', true);
 			} else {
-				alert(_errorMessage);
+				setAlertStatus(_errorMessage, true);
+			}
+
+			if (_errorType === 'generation') {
+				$('#RandomIDNumberTxtBox').addClass('alert-danger ');
+			} else {
+				$('#SAIDNumberTxtBox').addClass('alert-danger ');
 			}
 		};
+		function setAlertStatus(_msg, _error) {
+			$('#alertText').html(_msg);
+			if (_error === true) {
+				$('.alertDiv').removeClass('alert-success');
+				$('.glyphicon').removeClass('glyphicon-ok');
 
-		//SECTION END --> GENERIC.
+				$('.alertDiv').addClass('alert-danger');
+				$('.glyphicon').addClass('glyphicon-exclamation-sign');
+			} else {
+				$('.alertDiv').removeClass('alert-danger');
+				$('.glyphicon').removeClass('glyphicon-exclamation-sign');
+
+				$('.alertDiv').addClass('alert-success');
+				$('.glyphicon').addClass('glyphicon-ok');
+			}
+			$('.alertDiv').fadeIn();
+		};
 	</script>
 }

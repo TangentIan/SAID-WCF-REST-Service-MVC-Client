@@ -23,6 +23,7 @@ namespace SAID_MVCWebApplication
 
 			var jquery = new Bundle("~/bundles/jquery").Include(
 							"~/Scripts/jquery-{version}.js",
+							"~/Scripts/modernizr-{version}.js",
 							"~/Scripts/bootstrap.min.js"
 							);
 

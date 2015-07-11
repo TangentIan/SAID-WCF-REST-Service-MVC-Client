@@ -10,7 +10,6 @@
 <body>
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse_menu"
 					aria-expanded="false">
@@ -19,7 +18,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<div class="navbar-text navbar-left">SA ID Generator / Validator</div>
+				<div class="navbar-text navbar-left">RSA ID Generator/Validing Service</div>
 			</div>
 			<div class="collapse navbar-collapse" id="collapse_menu">
 				<ul class="nav navbar-nav pull-right">
@@ -29,13 +28,13 @@
 		</div>
 	</nav>
 	<div id="body">
-		<section class="content-wrapper main-content clear-fix">
+		<section>
 			@RenderBody()
 		</section>
 	</div>
-	<nav class="navbar navbar-inverse navbar-fixed-bottom">
+	<nav class="navbar navbar-inverse navbar-fixed-bottom collapse navbar-collapse">
 		<div class="container-fluid">
-			<div class="navbar-text navbar-left">&copy; @DateTime.Now.Year - SA ID Random Generator/Validator</div>
+			<div class="navbar-text navbar-left">&copy; @DateTime.Now.Year - RSA ID Generator/Validing Service</div>
 		</div>
 	</nav>
 	@Scripts.Render("~/bundles/jquery")
